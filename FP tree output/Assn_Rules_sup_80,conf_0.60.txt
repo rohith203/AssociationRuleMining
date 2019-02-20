@@ -1,0 +1,2 @@
+butter, root vegetables, (127) ---> whole milk, (2513) -conf(0.64)
+butter, yogurt, (144) ---> whole milk, (2513) -conf(0.64)

@@ -1,0 +1,6 @@
+curd, (524) ---> whole milk, (2513) -conf(0.49)
+butter, (545) ---> whole milk, (2513) -conf(0.50)
+domestic eggs, (624) ---> whole milk, (2513) -conf(0.47)
+root vegetables, whole milk, (481) ---> other vegetables, (1903) -conf(0.47)
+other vegetables, root vegetables, (466) ---> whole milk, (2513) -conf(0.49)
+other vegetables, yogurt, (427) ---> whole milk, (2513) -conf(0.51)

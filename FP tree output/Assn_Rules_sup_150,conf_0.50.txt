@@ -1,0 +1,1 @@
+other vegetables, yogurt, (427) ---> whole milk, (2513) -conf(0.51)
