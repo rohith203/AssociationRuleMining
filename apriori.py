@@ -5,10 +5,10 @@ from itertools import combinations
 groceries = open('./groceries.csv')
 
 #Minimum support 
-min_support = 180
+min_support = 250
 
 #Minimum confidence
-min_confidence = 0.45
+min_confidence = 1.0
 
 #Preprocessing of the data
 data = []
@@ -45,6 +45,7 @@ one_itemset = [x for x in one_itemset if support(x)>=min_support ]
 
 final_itemset.append(one_itemset)
 
+
 """
 Function to merge two (k)-itemsets and generate a (k+1)-dataset 
 """
@@ -57,6 +58,10 @@ def merge(a,b):
     else:
         return []
 
+
+maximal_itemsets = [] # The maximal frequent itemsets are stored in this list
+closed_itemsets = [] # The closed frequent itemsets are stored in this list
+
 # passing n-1 itemset
 '''
 creates all possible (k)-itemsets and stores them in the
@@ -66,10 +71,23 @@ def create_itemset(itemset):
     n_itemset = []
     size = len(itemset)-1
     for i in range(size):
+        item_supp = support(itemset[i])
+        isfreq = item_supp>=min_support
+        f1 = 1
+        f2 = 1
         for j in range(i+1,size+1):
             temp = merge(itemset[i],itemset[j])
             if len(temp)>0 and support(temp)>=min_support and (temp not in n_itemset):
                 n_itemset.append(temp)
+                supp = support(temp)
+                if supp >= min_support: f1 = 0
+                if supp == item_supp: f2 = 0
+
+        if f1==1 and isfreq:
+            maximal_itemsets.append(itemset[i])
+        if f2==1 and isfreq:
+            closed_itemsets.append(itemset[i])
+
     final_itemset.append(n_itemset)
 
 for i in range(2,5):
@@ -85,6 +103,13 @@ def print_freq_itemsets(freq_itemsets):
     print()
 print_freq_itemsets(final_itemset)
 
+print("\nMAXIMAL itemsets\n\n")
+
+print(maximal_itemsets)
+print("\nCLOSED itemsets\n")
+
+print(closed_itemsets)
+
 
 """
 Calculates and returns the confidence of two rules
@@ -94,7 +119,7 @@ def confidence(a,b):
 
 one_item_rules = []
 """
-Generates the one itemset rules and stores them in rules(a list)
+Generates the one itemset (one consequent) rules and stores them in rules(a list)
 """
 def get_one_item_rules(itemset):
     rules = []

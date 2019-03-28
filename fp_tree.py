@@ -5,7 +5,7 @@ groceries = open('./groceries.csv')
 
 # set minimum support and minimum confidence values
 min_support = 220  # Min frequency of itemsets to be generated.
-min_confidence = 0.35  # Min confidence of rules to be generated.
+min_confidence = 0.45  # Min confidence of rules to be generated.
 
 print(f'Minimum Support: {min_support}\nMinimum Confidence: {min_confidence}\n')
 
